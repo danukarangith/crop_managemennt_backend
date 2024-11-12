@@ -1,4 +1,4 @@
-package lk.ijse.crop_managemennt_backend.util;
+package lk.ijse.crop_managemennt_backend;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;

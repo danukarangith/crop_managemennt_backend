@@ -23,9 +23,9 @@ public class Mapping {
     public VehicleEntity convertToVehicleEntity(VehicleDTO dto){
         return modelMapper.map(dto, VehicleEntity.class);
     }
-//    public List<VehicleDTO> convertVehicleToDTOList(List<VehicleEntity> vehicles){
-//        return modelMapper.map(vehicles, new TypeToken<List<VehicleDTO>>(){}.getType());
-//    }
+    public List<VehicleDTO> convertVehicleToDTOList(List<VehicleEntity> vehicles){
+        return modelMapper.map(vehicles, new TypeToken<List<VehicleDTO>>(){}.getType());
+    }
 
 //    //Equipment and DTO
 //    public EquipmentDTO convertToEquipmentDTO(EquipmentEntity equipment){return modelMapper.map(equipment, EquipmentDTO.class);}
