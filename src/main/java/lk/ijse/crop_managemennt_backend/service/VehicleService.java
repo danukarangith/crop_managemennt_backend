@@ -9,4 +9,6 @@ public interface VehicleService {
     void saveVehicle(VehicleDTO vehicleDTO);
     List<VehicleDTO> getAllVehicles();
     VehicleResponse getSelectedVehicle(String vehicleCode);
+    void updateVehicle(String vehicleCode, VehicleDTO vehicleDTO);
+    void deleteVehicle(String vehicleCode);
 }

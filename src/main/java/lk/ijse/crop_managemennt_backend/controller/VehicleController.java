@@ -4,6 +4,7 @@ package lk.ijse.crop_managemennt_backend.controller;
 import lk.ijse.crop_managemennt_backend.customObj.VehicleResponse;
 import lk.ijse.crop_managemennt_backend.dto.VehicleDTO;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
+import lk.ijse.crop_managemennt_backend.exception.VehicleNotFound;
 import lk.ijse.crop_managemennt_backend.service.VehicleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,29 @@ public class VehicleController {
     @GetMapping(value = "/{vehicleCode}", produces = MediaType.APPLICATION_JSON_VALUE)
     public VehicleResponse getSelectedVehicle(@PathVariable("vehicleCode") String vehicleCode){
         return vehicleService.getSelectedVehicle(vehicleCode);
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(value = "/{vehicleCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateVehicle(@PathVariable("vehicleCode") String vehicleCode, @RequestBody VehicleDTO vehicle){
+        try{
+            if (vehicle == null && (vehicleCode == null || vehicle.equals(""))){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            vehicleService.updateVehicle(vehicleCode,vehicle);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (VehicleNotFound e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    @DeleteMapping(value = "/{vehicleCode}")
+    public ResponseEntity<Void> deleteVehicle(@PathVariable("vehicleCode") String vehicleCode){
+        try{
+            vehicleService.deleteVehicle(vehicleCode);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (VehicleNotFound e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
