@@ -1,5 +1,6 @@
 package lk.ijse.crop_managemennt_backend.util;
 
+import lk.ijse.crop_managemennt_backend.dto.EquipmentDTO;
 import lk.ijse.crop_managemennt_backend.dto.VehicleDTO;
 import lk.ijse.crop_managemennt_backend.entity.CropEntity;
 import lk.ijse.crop_managemennt_backend.entity.EquipmentEntity;
@@ -27,12 +28,12 @@ public class Mapping {
         return modelMapper.map(vehicles, new TypeToken<List<VehicleDTO>>(){}.getType());
     }
 
-//    //Equipment and DTO
-//    public EquipmentDTO convertToEquipmentDTO(EquipmentEntity equipment){return modelMapper.map(equipment, EquipmentDTO.class);}
-//    public EquipmentEntity convertToEquipmentEntity(EquipmentDTO dto){return modelMapper.map(dto, EquipmentEntity.class);}
-//    public List<EquipmentDTO> convertEquipmentToDTOList(List<EquipmentEntity> equipment){
-//        return modelMapper.map(equipment, new TypeToken<List<EquipmentDTO>>(){}.getType());
-//    }
+    //Equipment and DTO
+    public EquipmentDTO convertToEquipmentDTO(EquipmentEntity equipment){return modelMapper.map(equipment, EquipmentDTO.class);}
+    public EquipmentEntity convertToEquipmentEntity(EquipmentDTO dto){return modelMapper.map(dto, EquipmentEntity.class);}
+    public List<EquipmentDTO> convertEquipmentToDTOList(List<EquipmentEntity> equipment){
+        return modelMapper.map(equipment, new TypeToken<List<EquipmentDTO>>(){}.getType());
+    }
 //
 //    //Crop and DTO
 //    public CropDTO convertToCropDTO(CropEntity crop){return modelMapper.map(crop, CropDTO.class);}
