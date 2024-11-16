@@ -1,6 +1,7 @@
 package lk.ijse.crop_managemennt_backend.controller;
 
 
+import lk.ijse.crop_managemennt_backend.customObj.EquipmentResponse;
 import lk.ijse.crop_managemennt_backend.dto.EquipmentDTO;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
 import lk.ijse.crop_managemennt_backend.service.EquipmentService;
@@ -40,5 +41,10 @@ public class EquipmentController {
     public List<EquipmentDTO> getAllEquipments(){
         return equipmentService.getAllEquipments();
     }
+    @GetMapping(value = "/{equipmentId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public EquipmentResponse getSelectedEquipment(@PathVariable("equipmentId") String equipmentId){
+        return equipmentService.getSelectedEquipment(equipmentId);
+    }
+
 
 }

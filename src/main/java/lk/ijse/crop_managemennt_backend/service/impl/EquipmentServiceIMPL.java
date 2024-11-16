@@ -1,5 +1,7 @@
 package lk.ijse.crop_managemennt_backend.service.impl;
 
+import lk.ijse.crop_managemennt_backend.customObj.EquipmentResponse;
+import lk.ijse.crop_managemennt_backend.customObj.impl.EquipmentErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.EquipmentDao;
 import lk.ijse.crop_managemennt_backend.dto.EquipmentDTO;
 import lk.ijse.crop_managemennt_backend.entity.EquipmentEntity;
@@ -34,4 +36,14 @@ public class EquipmentServiceIMPL implements EquipmentService {
         List<EquipmentEntity> getAllEquipments = equipmentDao.findAll();
         return mapping.convertEquipmentToDTOList(getAllEquipments);
     }
+    @Override
+    public EquipmentResponse getSelectedEquipment(String equipmentId) {
+        if (equipmentDao.existsById(equipmentId)) {
+            EquipmentEntity equipmentEntityByEquipmentId = equipmentDao.getReferenceById(equipmentId);
+            return mapping.convertToEquipmentDTO(equipmentEntityByEquipmentId);
+        } else {
+            return new EquipmentErrorResponse(0, "Equipment not Found");
+        }
+    }
+
 }
