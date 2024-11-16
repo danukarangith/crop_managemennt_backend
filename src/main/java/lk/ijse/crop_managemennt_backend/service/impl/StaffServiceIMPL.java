@@ -2,12 +2,15 @@ package lk.ijse.crop_managemennt_backend.service.impl;
 
 import lk.ijse.crop_managemennt_backend.dao.StaffDao;
 import lk.ijse.crop_managemennt_backend.dto.StaffDTO;
+import lk.ijse.crop_managemennt_backend.entity.StaffEntity;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
 import lk.ijse.crop_managemennt_backend.service.StaffService;
 import lk.ijse.crop_managemennt_backend.util.AppUtil;
 import lk.ijse.crop_managemennt_backend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 
@@ -25,5 +28,11 @@ public class StaffServiceIMPL implements StaffService {
             throw new DataPersistFailedException("Cannot save Staff");
         }
     }
+    @Override
+    public List<StaffDTO> getAllStaffs() {
+        List<StaffEntity> getAllStaffs = staffDao.findAll();
+        return mapping.convertStaffToDTOList(getAllStaffs);
+    }
+
 
 }
