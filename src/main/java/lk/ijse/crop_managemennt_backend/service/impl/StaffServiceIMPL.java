@@ -1,5 +1,7 @@
 package lk.ijse.crop_managemennt_backend.service.impl;
 
+import lk.ijse.crop_managemennt_backend.customObj.StaffResponse;
+import lk.ijse.crop_managemennt_backend.customObj.impl.StaffErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.StaffDao;
 import lk.ijse.crop_managemennt_backend.dto.StaffDTO;
 import lk.ijse.crop_managemennt_backend.entity.StaffEntity;
@@ -32,6 +34,15 @@ public class StaffServiceIMPL implements StaffService {
     public List<StaffDTO> getAllStaffs() {
         List<StaffEntity> getAllStaffs = staffDao.findAll();
         return mapping.convertStaffToDTOList(getAllStaffs);
+    }
+    @Override
+    public StaffResponse getSelectedStaff(String staffId) {
+        if (staffDao.existsById(staffId)) {
+            StaffEntity staffEntityByStaffId = staffDao.getReferenceById(staffId);
+            return mapping.convertToStaffDTO(staffEntityByStaffId);
+        } else {
+            return new StaffErrorResponse(0, "Staff not Found");
+        }
     }
 
 

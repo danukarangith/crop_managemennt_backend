@@ -1,6 +1,7 @@
 package lk.ijse.crop_managemennt_backend.controller;
 
 
+import lk.ijse.crop_managemennt_backend.customObj.StaffResponse;
 import lk.ijse.crop_managemennt_backend.dto.StaffDTO;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
 import lk.ijse.crop_managemennt_backend.service.StaffService;
@@ -40,5 +41,9 @@ public class StaffController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<StaffDTO> getAllStaffs(){
         return staffService.getAllStaffs();
+    }
+    @GetMapping(value = "/{staffId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public StaffResponse getSelectedStaff(@PathVariable("staffId") String staffId){
+        return staffService.getSelectedStaff(staffId);
     }
 }
