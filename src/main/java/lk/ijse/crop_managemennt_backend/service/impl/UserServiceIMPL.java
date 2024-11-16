@@ -5,7 +5,9 @@ import lk.ijse.crop_managemennt_backend.customObj.impl.UserErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.UserDao;
 import lk.ijse.crop_managemennt_backend.dto.UserDTO;
 import lk.ijse.crop_managemennt_backend.entity.UserEntity;
+import lk.ijse.crop_managemennt_backend.enums.Role;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
+import lk.ijse.crop_managemennt_backend.exception.UserNotFound;
 import lk.ijse.crop_managemennt_backend.service.UserService;
 import lk.ijse.crop_managemennt_backend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,25 @@ public class UserServiceIMPL implements UserService {
         } else {
             return new UserErrorResponse(0, "User not Found");
         }
+    }
+    @Override
+    public void updateUser(String email, UserDTO incomeUserDTO) {
+        UserEntity existingUser = userDao.findById(email)
+                .orElseThrow(() -> new UserNotFound("User not found with email: " + email));
+
+        UserEntity updatedUser = new UserEntity();
+        updatedUser.setEmail(incomeUserDTO.getEmail() != null ? incomeUserDTO.getEmail() : existingUser.getEmail());
+        updatedUser.setPassword(incomeUserDTO.getPassword() != null ? incomeUserDTO.getPassword() : existingUser.getPassword());
+
+        if (incomeUserDTO.getRole() != null) {
+            updatedUser.setRole(Role.valueOf(String.valueOf(incomeUserDTO.getRole())));
+        } else {
+            updatedUser.setRole(existingUser.getRole());
+        }
+
+        userDao.delete(existingUser);
+
+        userDao.save(updatedUser);
     }
 
 }

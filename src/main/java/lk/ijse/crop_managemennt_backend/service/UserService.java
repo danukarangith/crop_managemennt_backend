@@ -9,6 +9,8 @@ public interface UserService {
     void saveUser(UserDTO userDTO);
     List<UserDTO> getAllUsers();
     UserResponse getSelectedUser(String email);
+    void updateUser(String email, UserDTO userDTO);
+
 
 }
 
