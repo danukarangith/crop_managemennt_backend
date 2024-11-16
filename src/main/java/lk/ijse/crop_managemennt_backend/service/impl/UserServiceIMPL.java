@@ -1,5 +1,7 @@
 package lk.ijse.crop_managemennt_backend.service.impl;
 
+import lk.ijse.crop_managemennt_backend.customObj.UserResponse;
+import lk.ijse.crop_managemennt_backend.customObj.impl.UserErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.UserDao;
 import lk.ijse.crop_managemennt_backend.dto.UserDTO;
 import lk.ijse.crop_managemennt_backend.entity.UserEntity;
@@ -30,6 +32,15 @@ public class UserServiceIMPL implements UserService {
     public List<UserDTO> getAllUsers() {
         List<UserEntity> getAllUsers = userDao.findAll();
         return mapping.convertUserToDTOList(getAllUsers);
+    }
+    @Override
+    public UserResponse getSelectedUser(String email) {
+        if (userDao.existsById(email)) {
+            UserEntity userEntityByEmail = userDao.getReferenceById(email);
+            return mapping.convertToUserDTO(userEntityByEmail);
+        } else {
+            return new UserErrorResponse(0, "User not Found");
+        }
     }
 
 }

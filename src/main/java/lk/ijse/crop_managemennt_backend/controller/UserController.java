@@ -1,5 +1,6 @@
 package lk.ijse.crop_managemennt_backend.controller;
 
+import lk.ijse.crop_managemennt_backend.customObj.UserResponse;
 import lk.ijse.crop_managemennt_backend.dto.UserDTO;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
 import lk.ijse.crop_managemennt_backend.service.UserService;
@@ -38,6 +39,10 @@ public class UserController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
+    }
+    @GetMapping(value = "/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserResponse getSelectedUser(@PathVariable("email") String email){
+        return userService.getSelectedUser(email);
     }
 
 }

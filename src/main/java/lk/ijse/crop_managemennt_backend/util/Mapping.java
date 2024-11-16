@@ -64,4 +64,5 @@ public class Mapping {
     public List<UserDTO> convertUserToDTOList(List<UserEntity> user){
         return modelMapper.map(user, new TypeToken<List<UserDTO>>(){}.getType());
     }
+    public UserDTO convertToUserDTO(UserEntity user){return modelMapper.map(user, UserDTO.class);}
 }
