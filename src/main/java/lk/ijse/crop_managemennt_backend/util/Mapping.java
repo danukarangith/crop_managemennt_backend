@@ -58,6 +58,10 @@ public class Mapping {
         return modelMapper.map(staffEntity, StaffDTO.class);
     }
 
+//user and DTO
 
     public UserEntity convertToUserEntity(UserDTO dto){return modelMapper.map(dto, UserEntity.class);}
+    public List<UserDTO> convertUserToDTOList(List<UserEntity> user){
+        return modelMapper.map(user, new TypeToken<List<UserDTO>>(){}.getType());
+    }
 }
