@@ -7,14 +7,14 @@ import java.util.Base64;
 import java.util.UUID;
 
 public class AppUtil {
+
+    private static int staffCounter = 0;
+
     public static String createVehicleCode(){return "Vehicle-"+ UUID.randomUUID();}
     public static String createEquipmentId(){return "Equipment-"+ UUID.randomUUID();}
-    public static String createCropId(){return "Crop-"+ UUID.randomUUID();}
-    public static String toBase64CropImage(MultipartFile cropImage) throws IOException {
-        if (cropImage == null || cropImage.isEmpty()) {
-            return null;
-        }
-        return Base64.getEncoder().encodeToString(cropImage.getBytes());
+    public static synchronized String createStaffId(){
+        staffCounter++;
+        return String.format("S%04d", staffCounter);
     }
 
 }
