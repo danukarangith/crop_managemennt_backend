@@ -2,11 +2,9 @@ package lk.ijse.crop_managemennt_backend.util;
 
 import lk.ijse.crop_managemennt_backend.dto.EquipmentDTO;
 import lk.ijse.crop_managemennt_backend.dto.StaffDTO;
+import lk.ijse.crop_managemennt_backend.dto.UserDTO;
 import lk.ijse.crop_managemennt_backend.dto.VehicleDTO;
-import lk.ijse.crop_managemennt_backend.entity.CropEntity;
-import lk.ijse.crop_managemennt_backend.entity.EquipmentEntity;
-import lk.ijse.crop_managemennt_backend.entity.StaffEntity;
-import lk.ijse.crop_managemennt_backend.entity.VehicleEntity;
+import lk.ijse.crop_managemennt_backend.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,4 +57,7 @@ public class Mapping {
     public StaffDTO convertToStaffDTO(StaffEntity staffEntity) {
         return modelMapper.map(staffEntity, StaffDTO.class);
     }
+
+
+    public UserEntity convertToUserEntity(UserDTO dto){return modelMapper.map(dto, UserEntity.class);}
 }
