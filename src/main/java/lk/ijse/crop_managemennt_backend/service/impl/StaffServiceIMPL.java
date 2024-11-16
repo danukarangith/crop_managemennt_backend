@@ -73,6 +73,15 @@ public class StaffServiceIMPL implements StaffService {
             staffDao.save(staffEntity);
         }
     }
+    @Override
+    public void deleteStaff(String staffId) {
+        Optional<StaffEntity> findId = staffDao.findById(staffId);
+        if (!findId.isPresent()){
+            throw new StaffNotFound("Staff not Found");
+        }else {
+            staffDao.deleteById(staffId);
+        }
+    }
 
 
 }
