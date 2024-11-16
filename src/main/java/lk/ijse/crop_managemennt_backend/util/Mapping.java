@@ -1,9 +1,6 @@
 package lk.ijse.crop_managemennt_backend.util;
 
-import lk.ijse.crop_managemennt_backend.dto.EquipmentDTO;
-import lk.ijse.crop_managemennt_backend.dto.StaffDTO;
-import lk.ijse.crop_managemennt_backend.dto.UserDTO;
-import lk.ijse.crop_managemennt_backend.dto.VehicleDTO;
+import lk.ijse.crop_managemennt_backend.dto.*;
 import lk.ijse.crop_managemennt_backend.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -65,4 +62,10 @@ public class Mapping {
         return modelMapper.map(user, new TypeToken<List<UserDTO>>(){}.getType());
     }
     public UserDTO convertToUserDTO(UserEntity user){return modelMapper.map(user, UserDTO.class);}
+
+
+
+    public CropEntity convertToCropEntity(CropDTO dto){return modelMapper.map(dto, CropEntity.class);}
 }
+
+
