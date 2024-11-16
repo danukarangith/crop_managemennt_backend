@@ -4,6 +4,7 @@ package lk.ijse.crop_managemennt_backend.controller;
 import lk.ijse.crop_managemennt_backend.customObj.StaffResponse;
 import lk.ijse.crop_managemennt_backend.dto.StaffDTO;
 import lk.ijse.crop_managemennt_backend.exception.DataPersistFailedException;
+import lk.ijse.crop_managemennt_backend.exception.StaffNotFound;
 import lk.ijse.crop_managemennt_backend.service.StaffService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,18 @@ public class StaffController {
     @GetMapping(value = "/{staffId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public StaffResponse getSelectedStaff(@PathVariable("staffId") String staffId){
         return staffService.getSelectedStaff(staffId);
+    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(value = "/{staffId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> updateStaff(@PathVariable("staffId") String staffId, @RequestBody StaffDTO staff){
+        try{
+            if (staff == null && (staffId == null || staff.equals(""))){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            staffService.updateStaff(staffId,staff);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (StaffNotFound e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
