@@ -89,5 +89,15 @@ public class FieldServiceIMPL implements FieldService {
 
         fieldDao.save(fieldEntity);
     }
+    @Override
+    public void deleteField(String fieldCode) {
+        Optional<FieldEntity> findId = fieldDao.findById(fieldCode);
+        if (!findId.isPresent()){
+            throw new FieldNotFound("Field not Found");
+        }else {
+            fieldDao.deleteById(fieldCode);
+        }
+    }
+
 
 }
