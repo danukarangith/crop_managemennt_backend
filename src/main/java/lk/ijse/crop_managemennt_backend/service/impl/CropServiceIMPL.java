@@ -1,5 +1,7 @@
 package lk.ijse.crop_managemennt_backend.service.impl;
 
+import lk.ijse.crop_managemennt_backend.customObj.CropResponse;
+import lk.ijse.crop_managemennt_backend.customObj.impl.CropErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.CropDao;
 import lk.ijse.crop_managemennt_backend.dto.CropDTO;
 import lk.ijse.crop_managemennt_backend.entity.CropEntity;
@@ -32,6 +34,15 @@ public class CropServiceIMPL implements CropService {
     public List<CropDTO> getAllCrops() {
         List<CropEntity> getAllCrops = cropDao.findAll();
         return mapping.convertCropToDTOList(getAllCrops);
+    }
+    @Override
+    public CropResponse getSelectedCrop(String cropCode) {
+        if (cropDao.existsById(cropCode)) {
+            CropEntity cropEntityByCropCode = cropDao.getReferenceById(cropCode);
+            return mapping.convertToCropDTO(cropEntityByCropCode);
+        } else {
+            return new CropErrorResponse(0, "Crop not Found");
+        }
     }
 
 }
