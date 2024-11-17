@@ -10,6 +10,7 @@ public class AppUtil {
 
     private static int staffCounter = 0;
     private static int cropCounter = 0;
+    private static int fieldCounter = 0;
 
     public static String createVehicleCode(){return "Vehicle-"+ UUID.randomUUID();}
     public static String createEquipmentId(){return "Equipment-"+ UUID.randomUUID();}
@@ -29,6 +30,22 @@ public class AppUtil {
     }
 
 
+    public static synchronized String createFieldId(){
+        fieldCounter++;
+        return String.format("F%04d",fieldCounter);
+    }
+    public static String toBase64FieldImage1(MultipartFile fieldImage1) throws IOException{
+        if (fieldImage1 == null || fieldImage1.isEmpty()){
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(fieldImage1.getBytes());
+    }
 
+    public static String toBase64FieldImage2(MultipartFile fieldImage2) throws IOException{
+        if (fieldImage2 == null || fieldImage2.isEmpty()){
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(fieldImage2.getBytes());
+    }
 
 }

@@ -7,7 +7,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class Mapping {
@@ -70,6 +72,22 @@ public class Mapping {
         return modelMapper.map(crop, new TypeToken<List<CropDTO>>(){}.getType());
     }
     public CropDTO convertToCropDTO(CropEntity crop){return modelMapper.map(crop, CropDTO.class);}
+
+
+    // Field and DTO
+    public FieldDTO convertToFieldDTO(FieldEntity fieldEntity) {
+        FieldDTO dto = modelMapper.map(fieldEntity, FieldDTO.class);
+        dto.setStaffIds(fieldEntity.getStaff() != null
+                ? fieldEntity.getStaff().stream().map(StaffEntity::getStaffId).collect(Collectors.toList())
+                : Collections.emptyList());
+        return dto;
+    }
+    public FieldEntity convertToFieldEntity(FieldDTO fieldDTO) {
+        return modelMapper.map(fieldDTO, FieldEntity.class);
+    }
+    public List<FieldDTO> convertFieldToDTOList(List<FieldEntity> fieldEntities) {
+        return modelMapper.map(fieldEntities, new TypeToken<List<FieldDTO>>(){}.getType());
+    }
 }
 
 
