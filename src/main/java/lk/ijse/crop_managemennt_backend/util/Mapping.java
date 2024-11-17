@@ -66,6 +66,9 @@ public class Mapping {
 
 
     public CropEntity convertToCropEntity(CropDTO dto){return modelMapper.map(dto, CropEntity.class);}
+    public List<CropDTO> convertCropToDTOList(List<CropEntity> crop){
+        return modelMapper.map(crop, new TypeToken<List<CropDTO>>(){}.getType());
+    }
 }
 
 
