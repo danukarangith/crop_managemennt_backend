@@ -1,5 +1,6 @@
 package lk.ijse.crop_managemennt_backend.controller;
 
+import lk.ijse.crop_managemennt_backend.customObj.FieldResponse;
 import lk.ijse.crop_managemennt_backend.dto.FieldDTO;
 import lk.ijse.crop_managemennt_backend.exception.FieldNotFound;
 import lk.ijse.crop_managemennt_backend.service.FieldService;
@@ -58,5 +59,9 @@ public class FieldController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<FieldDTO> getAllFields(){
         return fieldService.getAllFields();
+    }
+    @GetMapping(value = "/{fieldCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public FieldResponse getSelectedField(@PathVariable("fieldCode") String fieldCode){
+        return fieldService.getSelectedField(fieldCode);
     }
 }

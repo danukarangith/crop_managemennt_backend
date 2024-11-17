@@ -1,5 +1,7 @@
 package lk.ijse.crop_managemennt_backend.service.impl;
 
+import lk.ijse.crop_managemennt_backend.customObj.FieldResponse;
+import lk.ijse.crop_managemennt_backend.customObj.impl.FieldErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.FieldDao;
 import lk.ijse.crop_managemennt_backend.dao.StaffDao;
 import lk.ijse.crop_managemennt_backend.dto.FieldDTO;
@@ -47,6 +49,15 @@ public class FieldServiceIMPL implements FieldService {
     public List<FieldDTO> getAllFields() {
         List<FieldEntity> getAllFields = fieldDao.findAll();
         return mapping.convertFieldToDTOList(getAllFields);
+    }
+    @Override
+    public FieldResponse getSelectedField(String fieldCode) {
+        if (fieldDao.existsById(fieldCode)) {
+            FieldEntity fieldEntityByFieldCode = fieldDao.getReferenceById(fieldCode);
+            return mapping.convertToFieldDTO(fieldEntityByFieldCode);
+        } else {
+            return new FieldErrorResponse(0, "Field not Found");
+        }
     }
 
 }
