@@ -7,6 +7,7 @@ import lk.ijse.crop_managemennt_backend.dao.StaffDao;
 import lk.ijse.crop_managemennt_backend.dto.FieldDTO;
 import lk.ijse.crop_managemennt_backend.entity.FieldEntity;
 import lk.ijse.crop_managemennt_backend.entity.StaffEntity;
+import lk.ijse.crop_managemennt_backend.exception.FieldNotFound;
 import lk.ijse.crop_managemennt_backend.service.FieldService;
 import lk.ijse.crop_managemennt_backend.util.AppUtil;
 import lk.ijse.crop_managemennt_backend.util.Mapping;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 
@@ -58,6 +60,34 @@ public class FieldServiceIMPL implements FieldService {
         } else {
             return new FieldErrorResponse(0, "Field not Found");
         }
+    }
+    @Override
+    public void updateField(FieldDTO updateFieldDTO) {
+        Optional<FieldEntity> tmpField = fieldDao.findById(updateFieldDTO.getFieldCode());
+
+        if (!tmpField.isPresent()) {
+            throw new FieldNotFound("Field with code " + updateFieldDTO.getFieldCode() + " not found");
+        }
+
+        FieldEntity fieldEntity = tmpField.get();
+        fieldEntity.setFieldName(updateFieldDTO.getFieldName());
+        fieldEntity.setFieldLocation(updateFieldDTO.getFieldLocation());
+        fieldEntity.setExtendSize(updateFieldDTO.getExtendSize());
+
+        if (updateFieldDTO.getFieldImage1() != null) {
+            fieldEntity.setFieldImage1(updateFieldDTO.getFieldImage1());
+        }
+
+        if (updateFieldDTO.getFieldImage2() != null) {
+            fieldEntity.setFieldImage2(updateFieldDTO.getFieldImage2());
+        }
+
+        if (updateFieldDTO.getStaffIds() != null && !updateFieldDTO.getStaffIds().isEmpty()) {
+            List<StaffEntity> staffEntities = staffDao.findAllById(updateFieldDTO.getStaffIds());
+            fieldEntity.setStaff(staffEntities);
+        }
+
+        fieldDao.save(fieldEntity);
     }
 
 }
