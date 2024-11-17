@@ -43,5 +43,10 @@ public class FieldServiceIMPL implements FieldService {
     private List<StaffEntity> getStaffFromIds(List<String> staffIds){
         return staffDao.findAllById(staffIds);
     }
+    @Override
+    public List<FieldDTO> getAllFields() {
+        List<FieldEntity> getAllFields = fieldDao.findAll();
+        return mapping.convertFieldToDTOList(getAllFields);
+    }
 
 }
