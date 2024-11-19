@@ -94,4 +94,15 @@ public class CropDetailsController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping(value = "/{logCode}")
+    public ResponseEntity<Void> deleteCropDetails(@PathVariable("logCode") String logCode){
+        try{
+            cropDetailsService.deleteCropDetails(logCode);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (CropDetailsNotFound e){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

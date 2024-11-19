@@ -105,6 +105,15 @@ public class CropDetailsServiceIMPL implements CropDetailsService {
             throw new CropDetailsNotFound("Crop details with logCode " + updatecropDetailsDTO.getLogCode() + " not found");
         }
     }
+    @Override
+    public void deleteCropDetails(String logCode) {
+        Optional<CropDetailsEntity> findId = cropDetailsDao.findById(logCode);
+        if (!findId.isPresent()){
+            throw new CropDetailsNotFound("Crop Details not Found");
+        }else {
+            cropDetailsDao.deleteById(logCode);
+        }
+    }
     private List<FieldEntity> getFieldsFromCodes(List<String> fieldCodes){
         return fieldDao.findAllById(fieldCodes);
     }
