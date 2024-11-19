@@ -88,6 +88,29 @@ public class Mapping {
     public List<FieldDTO> convertFieldToDTOList(List<FieldEntity> fieldEntities) {
         return modelMapper.map(fieldEntities, new TypeToken<List<FieldDTO>>(){}.getType());
     }
+
+
+    public CropDetailsDTO convertToCropDetailsDTO(CropDetailsEntity entity) {
+        CropDetailsDTO dto = modelMapper.map(entity, CropDetailsDTO.class);
+
+        dto.setFieldCodes(entity.getField() != null
+                ? entity.getField().stream().map(FieldEntity::getFieldCode).collect(Collectors.toList())
+                : Collections.emptyList());
+
+        dto.setCropCodes(entity.getCrop() != null
+                ? entity.getCrop().stream().map(CropEntity::getCropCode).collect(Collectors.toList())
+                : Collections.emptyList());
+
+        dto.setStaffIds(entity.getStaff() != null
+                ? entity.getStaff().stream().map(StaffEntity::getStaffId).collect(Collectors.toList())
+                : Collections.emptyList());
+
+        return dto;
+    }
+    public CropDetailsEntity convertToCropDetailsEntity(CropDetailsDTO cropDetailsDTO) {return modelMapper.map(cropDetailsDTO, CropDetailsEntity.class);}
+    public List<CropDetailsDTO> convertCropDetailsToDTOList(List<CropDetailsEntity> cropDetailsEntities) {
+        return cropDetailsEntities.stream().map(this::convertToCropDetailsDTO).collect(Collectors.toList());
+    }
 }
 
 
