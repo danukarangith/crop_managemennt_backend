@@ -11,6 +11,7 @@ import lk.ijse.crop_managemennt_backend.entity.CropDetailsEntity;
 import lk.ijse.crop_managemennt_backend.entity.CropEntity;
 import lk.ijse.crop_managemennt_backend.entity.FieldEntity;
 import lk.ijse.crop_managemennt_backend.entity.StaffEntity;
+import lk.ijse.crop_managemennt_backend.exception.CropDetailsNotFound;
 import lk.ijse.crop_managemennt_backend.service.CropDetailsService;
 import lk.ijse.crop_managemennt_backend.util.AppUtil;
 import lk.ijse.crop_managemennt_backend.util.Mapping;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CropDetailsServiceIMPL implements CropDetailsService {
@@ -70,6 +72,37 @@ public class CropDetailsServiceIMPL implements CropDetailsService {
             return mapping.convertToCropDetailsDTO(cropDetailsEntityByLogCode);
         } else {
             return new CropDetailsErrorResponse(0, "Crop Details not Found");
+        }
+    }
+    @Override
+    public void updateCropDetails(CropDetailsDTO updatecropDetailsDTO) {
+        Optional<CropDetailsEntity> existingEntityOptional = cropDetailsDao.findById(updatecropDetailsDTO.getLogCode());
+
+        if (existingEntityOptional.isPresent()) {
+            CropDetailsEntity existingEntity = existingEntityOptional.get();
+
+            existingEntity.setLogDetails(updatecropDetailsDTO.getLogDetails());
+            existingEntity.setObservedImage(updatecropDetailsDTO.getObservedImage());
+
+
+            if (updatecropDetailsDTO.getFieldCodes() != null) {
+                List<FieldEntity> fieldEntities = fieldDao.findAllById(updatecropDetailsDTO.getFieldCodes());
+                existingEntity.setField(fieldEntities);
+            }
+
+            if (updatecropDetailsDTO.getCropCodes() != null) {
+                List<CropEntity> cropEntities = cropDao.findAllById(updatecropDetailsDTO.getCropCodes());
+                existingEntity.setCrop(cropEntities);
+            }
+
+            if (updatecropDetailsDTO.getStaffIds() != null) {
+                List<StaffEntity> staffEntities = staffDao.findAllById(updatecropDetailsDTO.getStaffIds());
+                existingEntity.setStaff(staffEntities);
+            }
+
+            cropDetailsDao.save(existingEntity);
+        } else {
+            throw new CropDetailsNotFound("Crop details with logCode " + updatecropDetailsDTO.getLogCode() + " not found");
         }
     }
     private List<FieldEntity> getFieldsFromCodes(List<String> fieldCodes){
