@@ -54,6 +54,12 @@ public class CropDetailsServiceIMPL implements CropDetailsService {
 
         cropDetailsDao.save(cropDetailsEntity);
     }
+
+    @Override
+    public List<CropDetailsDTO> getAllCropDetails() {
+        List<CropDetailsEntity> getAllCropDetails = cropDetailsDao.findAll();
+        return mapping.convertCropDetailsToDTOList(getAllCropDetails);
+    }
     private List<FieldEntity> getFieldsFromCodes(List<String> fieldCodes){
         return fieldDao.findAllById(fieldCodes);
     }
@@ -65,4 +71,6 @@ public class CropDetailsServiceIMPL implements CropDetailsService {
     private List<StaffEntity> getStaffFromIds(List<String> staffIds){
         return staffDao.findAllById(staffIds);
     }
+
+
 }
