@@ -1,5 +1,7 @@
 package lk.ijse.crop_managemennt_backend.service.impl;
 
+import lk.ijse.crop_managemennt_backend.customObj.CropDetailsResponse;
+import lk.ijse.crop_managemennt_backend.customObj.impl.CropDetailsErrorResponse;
 import lk.ijse.crop_managemennt_backend.dao.CropDao;
 import lk.ijse.crop_managemennt_backend.dao.CropDetailsDao;
 import lk.ijse.crop_managemennt_backend.dao.FieldDao;
@@ -59,6 +61,16 @@ public class CropDetailsServiceIMPL implements CropDetailsService {
     public List<CropDetailsDTO> getAllCropDetails() {
         List<CropDetailsEntity> getAllCropDetails = cropDetailsDao.findAll();
         return mapping.convertCropDetailsToDTOList(getAllCropDetails);
+    }
+
+    @Override
+    public CropDetailsResponse getSelectedCropDetail(String logCode) {
+        if (cropDetailsDao.existsById(logCode)) {
+            CropDetailsEntity cropDetailsEntityByLogCode = cropDetailsDao.getReferenceById(logCode);
+            return mapping.convertToCropDetailsDTO(cropDetailsEntityByLogCode);
+        } else {
+            return new CropDetailsErrorResponse(0, "Crop Details not Found");
+        }
     }
     private List<FieldEntity> getFieldsFromCodes(List<String> fieldCodes){
         return fieldDao.findAllById(fieldCodes);

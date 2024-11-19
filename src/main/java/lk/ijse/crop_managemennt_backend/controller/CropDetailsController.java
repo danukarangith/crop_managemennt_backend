@@ -1,5 +1,6 @@
 package lk.ijse.crop_managemennt_backend.controller;
 
+import lk.ijse.crop_managemennt_backend.customObj.CropDetailsResponse;
 import lk.ijse.crop_managemennt_backend.dto.CropDetailsDTO;
 import lk.ijse.crop_managemennt_backend.exception.CropDetailsNotFound;
 import lk.ijse.crop_managemennt_backend.service.CropDetailsService;
@@ -57,5 +58,9 @@ public class CropDetailsController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<CropDetailsDTO> getAllCropDetails(){
         return cropDetailsService.getAllCropDetails();
+    }
+    @GetMapping(value = "/{logCode}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CropDetailsResponse getSelectedCropDetail(@PathVariable("logCode") String logCode){
+        return cropDetailsService.getSelectedCropDetail(logCode);
     }
 }
