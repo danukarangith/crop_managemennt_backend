@@ -11,6 +11,7 @@ import lk.ijse.crop_managemennt_backend.exception.UserNotFound;
 import lk.ijse.crop_managemennt_backend.service.UserService;
 import lk.ijse.crop_managemennt_backend.util.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -73,5 +74,12 @@ public class UserServiceIMPL implements UserService {
             userDao.deleteById(email);
         }
     }
+    @Override
+    public UserDetailsService userDetailsService() {
+        return email ->
+                userDao.findByEmail(email)
+                        .orElseThrow(()-> new UserNotFound("User Not found"));
+    }
+
 
 }
