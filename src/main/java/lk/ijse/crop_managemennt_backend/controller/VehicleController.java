@@ -18,9 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/vehicles")
 @RequiredArgsConstructor
-
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 public class VehicleController {
-    @Autowired
+
     private final VehicleService vehicleService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/cropDetails")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 
 public class CropDetailsController {
     @Autowired

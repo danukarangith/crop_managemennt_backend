@@ -6,6 +6,7 @@ import lk.ijse.crop_managemennt_backend.exception.CropNotFound;
 import lk.ijse.crop_managemennt_backend.service.CropService;
 import lk.ijse.crop_managemennt_backend.util.AppUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,9 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/crop")
 @RequiredArgsConstructor
+@Slf4j
 
 public class CropController {
-    @Autowired
+
     private final CropService cropService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -42,6 +44,7 @@ public class CropController {
             cropDTO.setCategory(category);
             cropDTO.setCropSeason(cropSeason);
             cropDTO.setFieldCode(fieldCode);
+            log.info("Save crop");
 
             cropService.saveCrop(cropDTO);
             return new ResponseEntity<>(HttpStatus.CREATED);
