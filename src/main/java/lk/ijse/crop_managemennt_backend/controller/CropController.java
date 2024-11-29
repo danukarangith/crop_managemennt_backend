@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/v1/crop")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 @Slf4j
 
 public class CropController {
