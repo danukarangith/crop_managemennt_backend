@@ -16,12 +16,10 @@ public class AppUtil {
     public static String createVehicleCode(){return "Vehicle-"+ UUID.randomUUID();}
     public static String createEquipmentId(){return "Equipment-"+ UUID.randomUUID();}
     public static synchronized String createStaffId(){
-        staffCounter++;
-        return String.format("S%04d", staffCounter);
+        return "S-"+ UUID.randomUUID().toString().substring(0,5);
     }
-    public static synchronized String  createCropId(){
-        cropCounter++;
-        return String.format("C%04d",cropCounter);
+    public static  String  createCropId(){
+        return "C-"+ UUID.randomUUID().toString().substring(0,5);
     }
     public static String toBase64CropImage(MultipartFile cropImage) throws IOException {
         if (cropImage == null || cropImage.isEmpty()) {
@@ -32,8 +30,9 @@ public class AppUtil {
 
 
     public static synchronized String createFieldId(){
-        fieldCounter++;
-        return String.format("F%04d",fieldCounter);
+//        fieldCounter++;
+//        return String.format("F%04d",fieldCounter);
+        return "F-"+ UUID.randomUUID().toString().substring(0,5);
     }
     public static String toBase64FieldImage1(MultipartFile fieldImage1) throws IOException{
         if (fieldImage1 == null || fieldImage1.isEmpty()){
