@@ -19,9 +19,6 @@ The system is designed to manage and systematize operations related to crop moni
 - **Validation**: Client-side and server-side validation.
 
 
-### Postman Collection
-
--Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u).
 
 ## Application Architecture
 
@@ -41,7 +38,7 @@ The application follows a layered architecture:
 **Security**:
 - OAuth 2.0, JWT
 
-## System Entities
+## Postman Collection
 - Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u).
 
 
