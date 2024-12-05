@@ -20,7 +20,7 @@ The system is designed to manage and systematize operations related to crop moni
 
 
 ### Postman Collection
-Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u)
+Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u).
 
 ## Application Architecture
 
