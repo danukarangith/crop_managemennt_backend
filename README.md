@@ -42,8 +42,9 @@ The application follows a layered architecture:
 - OAuth 2.0, JWT
 
 ## System Entities
+- Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u).
 
- Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u).
+
 
 
 ## Installation
