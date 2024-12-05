@@ -46,3 +46,37 @@ The application follows a layered architecture:
    ```bash
    git clone https://github.com/your-username/crop-monitoring-system.git
    cd crop-monitoring-system
+
+
+
+   ### Security Features
+- Passwords are stored securely using encryption.
+- Role-based access control (MANAGER, ADMINISTRATIVE, SCIENTIST).
+- Spring Security integrated with OAuth 2.0 and JWT.
+
+### Validation
+- Validation is enforced at both the client and server levels.
+- UI ensures proper input with user-friendly messages.
+
+### Usage Guidelines
+- Ensure proper role-based access for all users.
+- Use the provided endpoints to interact with the system.
+
+### Endpoints
+- `POST /api/v1/fields`: Add a new field.
+- `GET /api/v1/fields`: Retrieve all fields.
+- `PATCH /api/v1/fields/{fieldCode}`: Update a field.
+- `DELETE /api/v1/fields/{fieldCode}`: Delete a field.
+- *(Add similar endpoints for other entities as per the implementation)*
+
+### Future Enhancements
+- Implement advanced analytics dashboards.
+- Add support for IoT integration for real-time field monitoring.
+- Extend user roles for customizable permissions.
+
+### Contributing
+1. Fork the repository.
+2. Create a new branch:
+   ```bash
+   git checkout -b feature-name
+
