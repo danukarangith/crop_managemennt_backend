@@ -49,7 +49,7 @@ The application follows a layered architecture:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/crop-monitoring-system.git
+   git clone https://github.com/danukarangith/crop-monitoring-backend.git
    cd crop-monitoring-system
 
 
