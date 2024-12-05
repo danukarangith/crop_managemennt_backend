@@ -1,6 +1,6 @@
 # Crop Monitoring System
 
-This repository contains the implementation of a **Crop Monitoring System** for **Green Shadow (Pvt) Ltd.**. The system is developed as part of the coursework for **ITS1114 – Advanced API Development** for the **BSc (Hons.) in Computer Science via GDSE** program.
+This repository contains the implementation of a **Crop Monitoring System** for **Green Shadow (Pvt) Ltd.**. 
 
 ## Overview
 
@@ -20,6 +20,7 @@ The system is designed to manage and systematize operations related to crop moni
 
 
 ### Postman Collection
+
 Access the Postman documentation for this API [here](https://documenter.getpostman.com/view/36300872/2sAYBbco3u).
 
 ## Application Architecture
