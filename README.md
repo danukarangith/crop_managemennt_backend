@@ -54,7 +54,7 @@ The application follows a layered architecture:
 
 
 
-   ### Security Features
+  ### Security Features
 - Passwords are stored securely using encryption.
 - Role-based access control (MANAGER, ADMINISTRATIVE, SCIENTIST).
 - Spring Security integrated with OAuth 2.0 and JWT.
@@ -79,9 +79,6 @@ The application follows a layered architecture:
 - Add support for IoT integration for real-time field monitoring.
 - Extend user roles for customizable permissions.
 
-### Contributing
-1. Fork the repository.
-2. Create a new branch:
-   ```bash
-   git checkout -b feature-name
-
+### Author
+Danuka Rangith
+ 
